@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 8080;
 
 // ─── Middleware ─────────────────────────────────────────────────
 
-app.use(express.json());
+app.use(express.json({ limit: '16kb' }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // ─── Gemini Setup ──────────────────────────────────────────────
@@ -25,16 +25,20 @@ const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT || 'drift-502807';
 const GOOGLE_CLOUD_LOCATION = process.env.GOOGLE_CLOUD_LOCATION || 'global';
 let genAI = null;
 
-try {
-  genAI = new GoogleGenAI({
-    vertexai: true,
-    project: GOOGLE_CLOUD_PROJECT,
-    location: GOOGLE_CLOUD_LOCATION,
-    apiVersion: 'v1',
-  });
-  console.log(`✅ Vertex AI initialized for project ${GOOGLE_CLOUD_PROJECT}`);
-} catch (error) {
-  console.error('⚠️  Vertex AI could not be initialized:', error);
+if (process.env.DRIFT_DISABLE_VERTEX_AI === 'true') {
+  console.warn('⚠️  Vertex AI disabled by DRIFT_DISABLE_VERTEX_AI');
+} else {
+  try {
+    genAI = new GoogleGenAI({
+      vertexai: true,
+      project: GOOGLE_CLOUD_PROJECT,
+      location: GOOGLE_CLOUD_LOCATION,
+      apiVersion: 'v1',
+    });
+    console.log(`✅ Vertex AI initialized for project ${GOOGLE_CLOUD_PROJECT}`);
+  } catch (error) {
+    console.error('⚠️  Vertex AI could not be initialized:', error);
+  }
 }
 
 // ─── AI Endpoint ───────────────────────────────────────────────
@@ -43,8 +47,12 @@ app.post('/api/coach', async (req, res) => {
   try {
     const { prompt } = req.body;
 
-    if (!prompt) {
-      return res.status(400).json({ error: 'Prompt is required' });
+    if (typeof prompt !== 'string' || !prompt.trim()) {
+      return res.status(400).json({ error: 'Prompt must be a non-empty string' });
+    }
+
+    if (prompt.length > 12_000) {
+      return res.status(413).json({ error: 'Prompt is too long' });
     }
 
     if (!genAI) {
@@ -95,7 +103,11 @@ app.get('*', (_req, res) => {
 
 // ─── Start ─────────────────────────────────────────────────────
 
-app.listen(PORT, () => {
-  console.log(`🚀 DRIFT server running on port ${PORT}`);
-  console.log(`   AI: ${genAI ? 'Gemini configured' : 'Fallbacks active'}`);
-});
+export { app };
+
+if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
+  app.listen(PORT, () => {
+    console.log(`🚀 DRIFT server running on port ${PORT}`);
+    console.log(`   AI: ${genAI ? 'Gemini configured' : 'Fallbacks active'}`);
+  });
+}
