@@ -23,12 +23,10 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 let genAI = null;
-let model = null;
 
 if (GEMINI_API_KEY) {
   genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-  console.log('✅ Gemini AI initialized');
+  console.log('✅ Gemini AI SDK initialized');
 } else {
   console.warn('⚠️  GEMINI_API_KEY not set — AI features will use fallbacks');
 }
@@ -43,14 +41,27 @@ app.post('/api/coach', async (req, res) => {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
-    if (!model) {
+    if (!genAI) {
       return res.status(503).json({ error: 'AI not configured' });
     }
 
-    const result = await model.generateContent(prompt);
-    const response = result.response.text();
+    // Try models in order of preference
+    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash-8b'];
+    let lastError = null;
 
-    res.json({ response });
+    for (const modelName of modelsToTry) {
+      try {
+        const model = genAI.getGenerativeModel({ model: modelName });
+        const result = await model.generateContent(prompt);
+        const response = result.response.text();
+        return res.json({ response });
+      } catch (err) {
+        lastError = err;
+        console.warn(`Model ${modelName} failed, trying fallback...`);
+      }
+    }
+
+    throw lastError;
   } catch (error) {
     console.error('Gemini API error:', error);
     res.status(500).json({ error: 'AI generation failed' });
@@ -62,7 +73,7 @@ app.post('/api/coach', async (req, res) => {
 app.get('/api/health', (_req, res) => {
   res.json({
     status: 'healthy',
-    aiConfigured: !!model,
+    aiConfigured: !!genAI,
     timestamp: new Date().toISOString(),
   });
 });
@@ -77,5 +88,5 @@ app.get('*', (_req, res) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 DRIFT server running on port ${PORT}`);
-  console.log(`   AI: ${model ? 'Gemini 2.0 Flash' : 'Fallbacks only'}`);
+  console.log(`   AI: ${genAI ? 'Gemini configured' : 'Fallbacks active'}`);
 });
