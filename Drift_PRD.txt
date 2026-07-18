@@ -1,0 +1,538 @@
+# DRIFT – AI Behavioral Drift Prevention System
+### Product Requirements Document (v1.0)
+
+---
+
+# Product Vision
+
+DRIFT is an AI-powered mobile-first web application that prevents harmful digital habits before they become addictions.
+
+Instead of measuring screen time, DRIFT measures **Attention Drift**—the gradual shift from intentional behavior to unconscious digital habits.
+
+Using Generative AI, behavioral science, psychology, emotional reinforcement, and human accountability, DRIFT helps users reclaim attention and build healthier real-world lives.
+
+---
+
+# Product Philosophy
+
+> **The AI learns the person you're trying to become.**
+
+> **Celebrate the life you reclaimed, not the minutes you saved.**
+
+The goal is not to maximize engagement.
+
+The goal is to help users eventually stop needing the app.
+
+---
+
+# Problem Statement
+
+Current digital wellbeing apps:
+
+- Measure screen time
+- Show charts
+- Block apps
+- React after unhealthy habits form
+
+They rarely explain **why** habits happen or how to replace them.
+
+DRIFT focuses on prevention instead of punishment.
+
+---
+
+# Target Audience
+
+Age: 16–45
+
+Users experiencing:
+
+- Doomscrolling
+- Social media overuse
+- YouTube addiction
+- Frequent phone checking
+- Reduced attention span
+- Digital distraction
+
+Primary users:
+
+- Students
+- Professionals
+- Remote workers
+- Parents
+
+---
+
+# Core Differentiators
+
+Instead of...
+
+Screen Time
+
+DRIFT measures
+
+**Attention Drift**
+
+---
+
+Instead of...
+
+Tracking behavior
+
+DRIFT explains behavior.
+
+---
+
+Instead of...
+
+Generic reminders
+
+DRIFT provides adaptive AI coaching.
+
+---
+
+Instead of...
+
+Rewarding streaks
+
+DRIFT rewards meaningful life moments.
+
+---
+
+Instead of...
+
+Keeping users inside the app
+
+DRIFT encourages users to leave the app.
+
+---
+
+# Core AI Engine
+
+## Adaptive Behavior Intelligence Engine
+
+### Inputs
+
+- Device usage signals (simulated for MVP)
+- Time of day
+- User goals
+- Mood check-ins
+- Reflection history
+- Previous interventions
+- Offline activity history
+- Future Self Profile
+- Accountability partner activity
+
+### AI Outputs
+
+- Behavior Profile
+- Drift Score
+- Trigger Analysis
+- Personalized Nudge
+- Adaptive Coaching
+- Offline Recommendation
+- Emotional Reward
+- Weekly Reflection
+- Updated Behavior Profile
+
+Every recommendation becomes more personalized over time.
+
+---
+
+# Features
+
+## 1. AI Behavioral Assessment
+
+Purpose
+
+Understand WHY users use their phone.
+
+Collect
+
+- Goals
+- Daily routine
+- Biggest distraction
+- Emotional triggers
+- Healthy habits
+- Coaching preference
+- Accountability buddy
+- Future aspirations
+
+Output
+
+Behavior Profile
+
+---
+
+## 2. Attention Drift Engine (USP)
+
+Measures gradual behavioral drift.
+
+Examples
+
+Reading ↓
+
+Exercise ↓
+
+Sleep ↓
+
+Phone Usage ↑
+
+Mindless Unlocks ↑
+
+Late-night Scrolling ↑
+
+Outputs
+
+- Drift Score
+- AI explanation
+- Predicted future risk
+
+The AI always explains WHY.
+
+---
+
+## 3. Adaptive AI Coach
+
+Every recommendation follows
+
+Trigger
+
+↓
+
+Need
+
+↓
+
+Replacement
+
+↓
+
+Action
+
+↓
+
+Learning
+
+Example
+
+Stress
+
+↓
+
+Instagram
+
+↓
+
+Walk
+
+↓
+
+Journal
+
+↓
+
+Updates future coaching
+
+The AI learns from previous success and failure.
+
+---
+
+## 4. Offline Life Discovery Engine
+
+The objective is replacing phone usage with real-world experiences.
+
+Recommendations include activities and places.
+
+Examples
+
+Health
+
+- Gym
+- Walking track
+- Yoga studio
+
+Learning
+
+- Library
+- Bookstore
+- Museum
+
+Nature
+
+- Park
+- Lake
+- Botanical garden
+
+Relationships
+
+- Coffee shop
+- Family dinner
+- Friend meetup
+
+Creativity
+
+- Art class
+- Photography walk
+- Music practice
+
+Recommendations consider
+
+- Time available
+- Mood
+- Energy
+- Interests
+- Previous success
+
+---
+
+## 5. Emotional Reward Engine
+
+Reward life.
+
+Not screen-time reduction.
+
+Examples
+
+Instead of
+
+"You reduced screen time."
+
+Say
+
+"You reclaimed enough time to finish two chapters of your book."
+
+Instead of
+
+"7-day streak."
+
+Say
+
+"You protected seven distraction-free family dinners."
+
+Every reward references the user's personal goals.
+
+---
+
+## 6. Human Accountability Loop
+
+Optional trusted buddy.
+
+Examples
+
+- Friend
+- Parent
+- Partner
+- Mentor
+
+Buddy receives encouragement opportunities.
+
+Never surveillance.
+
+Never automatic sharing.
+
+User always controls what is shared.
+
+---
+
+## 7. Weekly AI Reflection
+
+AI generates a personalized summary.
+
+Includes
+
+- Wins
+- Triggers
+- Patterns
+- Improvements
+- Next focus
+
+Narrative instead of charts.
+
+---
+
+## 8. Life Wishlist (Future Self Profile)
+
+Users define the person they want to become.
+
+Examples
+
+- Read 20 books
+- Get fit
+- Spend more time with family
+- Learn guitar
+- Sleep better
+- Build side projects
+
+The AI references these aspirations in every coaching session.
+
+Example
+
+Instead of
+
+"Stop scrolling."
+
+Say
+
+"You wanted to become someone who reads every evening. Would you like to read for 20 minutes instead?"
+
+---
+
+# Behavioral Science
+
+Every recommendation should use
+
+- Habit Loop
+- Replacement Theory
+- Implementation Intentions
+- Identity Reinforcement
+- Positive Reinforcement
+- Small Wins
+
+Never remove habits.
+
+Replace them.
+
+---
+
+# Psychology Principles
+
+The AI understands
+
+- Stress
+- Boredom
+- Loneliness
+- Fatigue
+- Anxiety
+- Celebration
+- Transition moments
+
+The AI is a coach.
+
+Never a therapist.
+
+Never a doctor.
+
+---
+
+# Responsible AI
+
+## Privacy
+
+- User owns all data.
+- Minimal data collection.
+- User can delete all data.
+
+## Transparency
+
+The AI always explains WHY recommendations were made.
+
+## User Control
+
+Users decide
+
+- Accept suggestion
+- Ignore suggestion
+- Share reflection
+- Contact buddy
+
+## Safety
+
+Never
+
+- Diagnose
+- Manipulate
+- Shame
+- Create fear
+
+If severe distress is detected, recommend professional support.
+
+## Security
+
+- Secure authentication
+- Encryption in transit
+- Encryption at rest
+- Explicit consent before sharing
+
+---
+
+# Accessibility
+
+- Mobile-first
+- WCAG AA
+- Keyboard accessible
+- Voice friendly
+- High contrast
+- Large touch targets
+- Low cognitive load
+
+---
+
+# Success Metrics
+
+Measure
+
+- Attention Drift ↓
+- Mindless Unlocks ↓
+- Offline Activities ↑
+- Replacement Success ↑
+- Intentional Phone Usage ↑
+- Reflection Completion ↑
+- User Dependence On App ↓
+
+Do NOT optimize for screen time.
+
+---
+
+# Exit Criteria
+
+The product is complete when
+
+✅ AI understands the user
+
+✅ AI predicts behavior drift
+
+✅ AI explains WHY behavior changes
+
+✅ AI generates personalized coaching
+
+✅ AI recommends offline alternatives
+
+✅ AI references the Future Self Profile
+
+✅ AI creates emotional rewards
+
+✅ AI includes trusted human accountability
+
+✅ AI follows Responsible AI principles
+
+✅ User spends less than one minute per day inside DRIFT
+
+✅ Every feature encourages users to spend more time in real life than inside the application.
+
+---
+
+# Technical Requirements
+
+- React 19
+- TypeScript (Strict)
+- Vite
+- Tailwind CSS v4
+- shadcn/ui
+- React Hook Form
+- Zod
+- Feature-based architecture
+- Responsive
+- Accessible
+- Production-ready
+- Minimal dependencies
+- Mobile responsive
+
+---
+
+# Final Product Statement
+
+DRIFT is an AI Behavioral Drift Prevention System.
+
+It learns the person users want to become, detects unhealthy behavioral drift before habits become addictions, provides transparent AI coaching grounded in behavioral science and psychology, encourages meaningful offline experiences, celebrates life instead of screen-time reductions, protects user privacy, and gradually helps users become independent of the application itself.
+
+**The ultimate success of DRIFT is when users no longer need DRIFT.**

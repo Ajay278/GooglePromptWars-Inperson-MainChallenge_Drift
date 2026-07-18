@@ -1,0 +1,542 @@
+# DRIFT — Technical Design Specification (MVP)
+
+## Product Summary
+
+DRIFT is an AI-powered behavioral coaching platform that prevents unhealthy digital habits before they become addictions.
+
+Unlike screen-time trackers, DRIFT measures **Attention Drift**—the gradual movement from intentional behavior toward unconscious phone usage.
+
+The AI does not maximize engagement.
+
+It helps users eventually stop needing the app.
+
+---
+
+# Engineering Principles
+
+## Core Rule
+
+> AI explains behavior.
+>
+> AI never determines behavior.
+
+Behavior analysis must always be deterministic and explainable.
+
+LLMs are responsible for:
+
+- Personalization
+- Coaching
+- Reflection
+- Emotional rewards
+- Natural language generation
+
+Business logic never depends on AI.
+
+---
+
+# Product Goals
+
+DRIFT should
+
+- Detect Attention Drift
+- Explain WHY it happened
+- Recommend healthier replacements
+- Reinforce future identity
+- Encourage offline life
+- Reduce dependence on DRIFT itself
+
+---
+
+# MVP Constraints
+
+## Platform
+
+React 19 + TypeScript + Vite PWA
+
+Device usage is simulated.
+
+Native Screen Time APIs are future work.
+
+---
+
+## Daily Usage
+
+Target
+
+Less than one minute/day
+
+Passive interactions
+
+- Push notifications
+- Widgets
+- Quick actions
+
+Active interactions
+
+- Weekly reflection
+- Goal updates
+
+---
+
+# System Architecture
+
+```text
+React PWA
+
+↓
+
+Presentation Layer
+
+↓
+
+Feature Layer
+
+↓
+
+Behavior Engine
+
+Recommendation Engine
+
+AI Orchestrator
+
+Reward Engine
+
+Reflection Engine
+
+Wishlist Engine
+
+Accountability Engine
+
+↓
+
+Repository Layer
+
+↓
+
+API
+
+↓
+
+PostgreSQL
+
+Vector Database
+
+Authentication
+
+Maps Provider
+```
+
+---
+
+# Core Components
+
+## Behavior Engine
+
+Responsible for
+
+- Drift calculation
+- Risk prediction
+- Behavioral analysis
+
+Outputs
+
+- Drift Score
+- Confidence
+- Risk Level
+- Contributing Factors
+
+No AI involved.
+
+---
+
+## AI Orchestrator
+
+Responsible for
+
+- Coaching
+- Weekly reflection
+- Personalized explanations
+- Emotional rewards
+
+Never calculates Drift Score.
+
+---
+
+## Recommendation Engine
+
+Ranks offline activities using
+
+- Time
+- Mood
+- Energy
+- Previous success
+- Future Self goals
+- Weather
+- Distance (future)
+
+---
+
+## Safety Engine
+
+Validates every AI response.
+
+Rejects
+
+- Shame
+- Fear
+- Diagnosis
+- Manipulation
+- Unsafe advice
+- Time-inappropriate suggestions
+
+---
+
+# AI Pipeline
+
+```text
+User Context
+
++
+
+Behavior Profile
+
++
+
+Future Self
+
++
+
+Recent Success
+
++
+
+Current Drift Snapshot
+
+↓
+
+Prompt Builder
+
+↓
+
+LLM
+
+↓
+
+Safety Validation
+
+↓
+
+Structured JSON
+
+↓
+
+UI
+```
+
+---
+
+# Attention Drift Engine
+
+Inputs
+
+- Mood
+- Energy
+- Time of day
+- Reflection consistency
+- Goal alignment
+- Simulated usage
+- Offline activities
+- Previous interventions
+
+Pipeline
+
+Normalize
+
+↓
+
+Weight
+
+↓
+
+Drift Score
+
+↓
+
+Risk Category
+
+↓
+
+Store Snapshot
+
+↓
+
+AI Explanation
+
+---
+
+# Example Drift Weights
+
+Mindless Unlocks — 25%
+
+Mood Decline — 20%
+
+Sleep Quality — 20%
+
+Goal Neglect — 15%
+
+Reflection Skipped — 10%
+
+Offline Inactivity — 10%
+
+Produces
+
+0–100 Drift Score
+
+---
+
+# AI Agents
+
+## Profile Agent
+
+Updates Behavior Profile.
+
+---
+
+## Coach Agent
+
+Creates personalized interventions.
+
+---
+
+## Reflection Agent
+
+Generates weekly narrative.
+
+---
+
+## Reward Agent
+
+Creates emotional rewards.
+
+---
+
+## Recommendation Agent
+
+Ranks offline alternatives.
+
+---
+
+## Safety Agent
+
+Filters unsafe AI outputs.
+
+---
+
+# Data Model
+
+User
+
+BehaviorProfile
+
+FutureSelfProfile
+
+MoodCheck
+
+DriftSnapshot
+
+Intervention
+
+OfflineActivity
+
+Reflection
+
+Reward
+
+Buddy
+
+Consent
+
+---
+
+# User Flow
+
+Install
+
+↓
+
+Behavior Assessment
+
+↓
+
+Future Self Profile
+
+↓
+
+Initial Drift Score
+
+↓
+
+Daily Coaching
+
+↓
+
+Offline Activity
+
+↓
+
+Reflection
+
+↓
+
+Reward
+
+↓
+
+Behavior Profile Updated
+
+---
+
+# Accountability Flow
+
+Choose Buddy
+
+↓
+
+Consent
+
+↓
+
+Invitation
+
+↓
+
+Accepted
+
+↓
+
+Optional Sharing
+
+↓
+
+Positive Celebration
+
+Never automatic.
+
+Never surveillance.
+
+---
+
+# Responsible AI
+
+Always
+
+- Explain recommendations
+- Protect privacy
+- Minimize data
+- Encrypt data
+- Require consent
+- Allow deletion
+
+Never
+
+- Diagnose
+- Manipulate
+- Shame
+- Fear users
+- Replace therapy
+
+---
+
+# Offline First
+
+Application works without internet.
+
+Cache
+
+- Dashboard
+- Previous coaching
+- Reflections
+- Activities
+
+Sync when online.
+
+---
+
+# Edge Cases
+
+- User ignores suggestions
+- User changes goals
+- AI unavailable
+- Offline mode
+- Notification denied
+- Buddy removed
+- Maps unavailable
+- Invalid AI response
+- Time-inappropriate recommendation
+
+Every case has deterministic fallback behavior.
+
+---
+
+# Success Metrics
+
+Increase
+
+- Offline activities
+- Reflection completion
+- Replacement success
+- Intentional phone usage
+
+Reduce
+
+- Attention Drift
+- Mindless unlocks
+- User dependence on DRIFT
+
+---
+
+# Technical Stack
+
+React 19
+
+TypeScript (Strict)
+
+Vite
+
+Tailwind CSS v4
+
+shadcn/ui
+
+React Hook Form
+
+Zod
+
+TanStack Query
+
+PWA
+
+PostgreSQL
+
+Vector Database
+
+LLM
+
+Feature-based architecture
+
+Accessible (WCAG AA)
+
+Production-ready
+
+Minimal dependencies
+
+---
+
+# Engineering Philosophy
+
+The Behavior Engine is the source of truth.
+
+The AI is an adaptive behavioral coach layered on top.
+
+The ultimate success metric is not engagement.
+
+**The ultimate success of DRIFT is when users no longer need DRIFT.**
