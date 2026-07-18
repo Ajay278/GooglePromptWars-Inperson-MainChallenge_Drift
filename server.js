@@ -6,7 +6,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenAI } from '@google/genai';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,14 +21,20 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // ─── Gemini Setup ──────────────────────────────────────────────
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
+const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT || 'drift-502807';
+const GOOGLE_CLOUD_LOCATION = process.env.GOOGLE_CLOUD_LOCATION || 'global';
 let genAI = null;
 
-if (GEMINI_API_KEY) {
-  genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-  console.log('✅ Gemini AI SDK initialized');
-} else {
-  console.warn('⚠️  GEMINI_API_KEY not set — AI features will use fallbacks');
+try {
+  genAI = new GoogleGenAI({
+    vertexai: true,
+    project: GOOGLE_CLOUD_PROJECT,
+    location: GOOGLE_CLOUD_LOCATION,
+    apiVersion: 'v1',
+  });
+  console.log(`✅ Vertex AI initialized for project ${GOOGLE_CLOUD_PROJECT}`);
+} catch (error) {
+  console.error('⚠️  Vertex AI could not be initialized:', error);
 }
 
 // ─── AI Endpoint ───────────────────────────────────────────────
@@ -46,14 +52,17 @@ app.post('/api/coach', async (req, res) => {
     }
 
     // Try models in order of preference
-    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash-8b'];
+    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash'];
     let lastError = null;
 
     for (const modelName of modelsToTry) {
       try {
-        const model = genAI.getGenerativeModel({ model: modelName });
-        const result = await model.generateContent(prompt);
-        const response = result.response.text();
+        const result = await genAI.models.generateContent({
+          model: modelName,
+          contents: prompt,
+        });
+        const response = result.text;
+        if (!response) throw new Error('Vertex AI returned an empty response');
         return res.json({ response });
       } catch (err) {
         lastError = err;
